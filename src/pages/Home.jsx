@@ -5,17 +5,28 @@ import Borrow from "../components/Borrow/Borrow";
 import Happening from "../components/Happening/Happening";
 import Disclosures from "../components/Disclosures/Disclosures";
 import Footer from "../components/Footer/Footer";
+import { toggleMenu } from "../hooks/toogleMenu";
 
 function Home() {
+  const { toggle, setToggle } = toggleMenu();
+  console.log(toggle);
+
   return (
     <div>
-      <Navbar />
-      <Header />
-      <Access />
-      <Borrow />
-      <Happening />
-      <Disclosures />
-      <Footer />
+      <div>
+        <Navbar toggle={toggle} setToggle={setToggle} />
+      </div>
+      <div
+        onClick={() => setToggle(false)}
+        className={`${toggle && "home__section"}`}
+      >
+        <Header />
+        <Access />
+        <Borrow />
+        <Happening />
+        <Disclosures />
+        <Footer />
+      </div>
     </div>
   );
 }

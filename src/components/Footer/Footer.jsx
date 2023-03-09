@@ -24,7 +24,7 @@ function Footer() {
             </a>
           </div>
         </div>
-        <div className="footer__list">
+        <div className="footer__list desktop">
           <ul>
             <li>
               <a href="">Support</a>
@@ -74,6 +74,59 @@ function Footer() {
               <span>© 2023 U.S. Bank</span>
             </li>
           </ul>
+        </div>
+        <div className="footer__list mobile">
+          <div className="mobile__left">
+            <ul>
+              <li>
+                <a href="">Support</a>
+              </li>
+              <li>
+                <a href="">Financial educationp</a>
+              </li>
+              <li>
+                <a href="">Careers</a>
+              </li>
+              <li>
+                <a href="">Online tracking & advertising</a>
+              </li>
+              <li>
+                <a href="">
+                  Your California privacy choice
+                  <img src={privacyOption} alt="" />
+                </a>
+              </li>
+            </ul>
+            <ul>
+              <li>
+                <a href="">Security</a>
+              </li>
+              <li>
+                <a href="">Site map</a>
+              </li>
+              <li>
+                <a href="">Accessibility</a>
+              </li>
+              <li>
+                <a href="">Privacy</a>
+              </li>
+              <li>
+                <a href="">CoBrowse</a>
+              </li>
+            </ul>
+          </div>
+          <div className="mobile__right">
+            <ul className="footer__span">
+              <li>
+                <span>
+                  U.S Bank <br /> 800 Nicollet Mall <br /> Minneapolis, MN 55402
+                </span>
+              </li>
+              <li>
+                <span>© 2023 U.S. Bank</span>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>

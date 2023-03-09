@@ -12,6 +12,11 @@
   margin: 0;
 }
 
+.app {
+  width: 100%;
+  overflow-x: hidden;
+}
+
 a {
   text-decoration: none;
   color: var(--text-color);
@@ -38,11 +43,14 @@ ul {
   background-color: var(--white-color);
 }
 
+.home__section {
+  position: relative;
+  z-index: 0;
+}
+
 @media screen and (max-width: 1050px) {
   .container {
-    width: 100%;
-    padding-left: 20px;
-    padding-right: 20px;
+    width: calc(100% - 2rem);
   }
 }
 

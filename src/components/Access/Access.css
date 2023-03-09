@@ -93,6 +93,10 @@
   color: #0a41c5;
 }
 
+hr {
+  border: thin solid #cdcdd3;
+}
+
 /* Responsive */
 @media screen and (max-width: 1050px) {
   .access__content {
@@ -120,5 +124,33 @@
 
   .hr {
     display: none;
+  }
+}
+
+@media screen and (max-width: 671px) {
+  .access .container h2 {
+    font-size: 2rem;
+  }
+
+  .access__content-left {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .access__content-left img {
+    width: 538px;
+  }
+
+  .access__content-center {
+    width: 100%;
+  }
+
+  .access__center-btn button {
+    width: 100%;
+  }
+
+  .access__right-container {
+    width: 100%;
   }
 }

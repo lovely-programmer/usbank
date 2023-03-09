@@ -20,14 +20,9 @@
   gap: 30px;
 }
 
-.happening__content div {
+.happening__content-right {
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.happening__content-container {
-  width: 352px;
+  gap: 30px;
 }
 
 .happening__content-img {
@@ -64,10 +59,27 @@
 
 @media screen and (max-width: 1050px) {
   .happening__content {
-    flex-wrap: wrap;
+    position: relative;
+    flex-direction: column;
   }
 
-  .happening__content-container {
-    width: 454px;
+  .happening__content-left {
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 671px) {
+  .happening__content {
+    gap: 3rem;
+  }
+
+  .happening__content-right {
+    width: 100%;
+    flex-direction: column;
+    gap: 4rem;
+  }
+
+  .happening__content-left {
+    width: 100%;
   }
 }
