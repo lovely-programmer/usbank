@@ -200,7 +200,7 @@ function Navbar({ toggle, setToggle }) {
                   </a>
                 </li>
                 <li>
-                  <span>Log in</span>
+                  <Link to="/signin">Log in</Link>
                 </li>
               </ul>
             </div>
