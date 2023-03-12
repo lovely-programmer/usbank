@@ -1,0 +1,54 @@
+.admin__dashboard {
+  display: flex;
+  gap: 30px;
+}
+
+.admin__content {
+  margin-top: 1rem;
+}
+
+.admin__children {
+  width: 100%;
+}
+
+.admin__content .form__group input {
+  width: 70%;
+}
+
+.admin__content .form__group select {
+  width: 70%;
+  outline: none;
+  padding: 1rem;
+  border-radius: 4px;
+}
+
+.admin__content .form__group button {
+  width: 70%;
+}
+
+.admin__content table {
+  width: 80%;
+}
+
+.admin__content tr td {
+  border: thin solid gray;
+  padding: 8px;
+}
+
+.admin__content tr td button {
+  padding: 10px 15px;
+  cursor: pointer;
+  outline: none;
+  background-color: var(--red-color);
+  border: none;
+  color: var(--white-color);
+}
+
+.admin__content tr td a {
+  text-decoration: underline;
+  color: #120c23;
+}
+
+.admin__content h1 {
+  margin-bottom: 1rem;
+}

@@ -320,6 +320,10 @@
   line-height: 1.5;
 }
 
+.navbar__menu {
+  display: none;
+}
+
 /* Responsiveness */
 @media screen and (max-width: 1050px) {
   .navbar__first,
@@ -332,5 +336,9 @@
     padding-bottom: 30px;
     position: relative;
     z-index: 1000;
+  }
+
+  .navbar__menu {
+    display: block;
   }
 }

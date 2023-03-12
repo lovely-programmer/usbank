@@ -1,0 +1,33 @@
+.dashboardNav {
+  box-shadow: 0 0 0.75rem #cdcdd3;
+}
+
+.dashboardNav__container {
+  display: flex;
+  padding: 1rem 0;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dashboardNav__logo img {
+  height: 50px;
+  object-fit: contain;
+}
+
+.dashboardNav__content ul {
+  display: flex;
+  gap: 50px;
+  align-items: center;
+}
+
+.dashboardNav__content ul li:first-child {
+  font-size: 1.5rem;
+}
+
+.dashboardNav__content ul li a img {
+  width: 50px;
+  height: auto;
+  object-fit: contain;
+  border: 5px solid #0c2074;
+  border-radius: 50%;
+}

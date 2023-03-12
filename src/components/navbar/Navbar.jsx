@@ -6,10 +6,60 @@ import { IoLocationOutline } from "react-icons/io5";
 import { MdOutlineMenu, MdOutlineGroups } from "react-icons/md";
 import { HiX } from "react-icons/hi";
 import { AiOutlineRight } from "react-icons/ai";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { login, reset } from "../../features/auth/authSlice";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import Spinner from "../spinner/Spinner";
+import { toast } from "react-toastify";
 
 function Navbar({ toggle, setToggle }) {
   const [showlogin, setShowLogin] = useState(false);
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const { user, isLoading, isError, isSuccess, message } = useSelector(
+    (state) => state.auth
+  );
+
+  useEffect(() => {
+    if (isError) {
+      toast.error(message);
+    }
+
+    if (isSuccess || user) {
+      navigate("/dashboard");
+    }
+
+    dispatch(reset());
+  }, [user, isSuccess, isError, message, navigate, dispatch]);
+
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const { email, password } = formData;
+
+  const handleChange = (e) => {
+    setFormData((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const userData = { email, password };
+    dispatch(login(userData));
+  };
+
+  if (isLoading) {
+    return <Spinner />;
+  }
+
   return (
     <div className="navbar">
       <div className="navbar__container">
@@ -55,7 +105,7 @@ function Navbar({ toggle, setToggle }) {
                 <div className="login">
                   <div className="login__container">
                     <h2>Account login</h2>
-                    <div className="login__acount">
+                    <form onSubmit={handleSubmit} className="login__acount">
                       <p>Account type</p>
                       <select name="" id="">
                         <option value="">Online Banking</option>
@@ -65,14 +115,29 @@ function Navbar({ toggle, setToggle }) {
                         <option value="">Institutional</option>
                       </select>
                       <div className="login__input">
-                        <input type="text" placeholder="Username" />
+                        <input
+                          type="email"
+                          required
+                          id="email"
+                          name="email"
+                          value={email}
+                          placeholder="Email"
+                          onChange={handleChange}
+                        />
                       </div>
                       <div className="check__username">
                         <input type="checkbox" />
                         <span>Remember my username.</span>
                       </div>
                       <div className="login__input">
-                        <input type="password" placeholder="Password" />
+                        <input
+                          type="password"
+                          placeholder="Password"
+                          onChange={handleChange}
+                          value={password}
+                          name="password"
+                          required
+                        />
                       </div>
                       <div className="login__button">
                         <button>Log in</button>
@@ -83,9 +148,9 @@ function Navbar({ toggle, setToggle }) {
                         </a>
                       </div>
                       <div className="login__create-account">
-                        <a href="">Create a username and password</a>
+                        <Link to="/signup">Create a username and password</Link>
                       </div>
-                    </div>
+                    </form>
                   </div>
                 </div>
               )}

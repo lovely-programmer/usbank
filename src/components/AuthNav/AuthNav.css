@@ -1,0 +1,25 @@
+.authNav {
+  background-color: #f7f7fa;
+}
+
+.authNav__container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 0;
+}
+
+.authNav__logo img {
+  height: 25px;
+  object-fit: contain;
+}
+
+.auth__link a {
+  color: #0c2074;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.auth__link a:hover {
+  text-decoration: underline;
+}
