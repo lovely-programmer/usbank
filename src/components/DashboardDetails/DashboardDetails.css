@@ -55,3 +55,13 @@
   gap: 1rem;
   cursor: pointer;
 }
+
+@media screen and (max-width: 1050px) {
+  .dashboardDetails__left {
+    display: none;
+  }
+
+  .dashboardDetails__right {
+    width: 100%;
+  }
+}

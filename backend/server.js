@@ -4,6 +4,7 @@ import userRouter from "./routes/userRoutes.js";
 import connectDb from "./config/db.js";
 import cors from "cors";
 import errorHandler from "./middleware/errorMiddleware.js";
+import transactionRouter from "./routes/transactionRoutes.js";
 
 dotenv.config();
 
@@ -20,6 +21,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 
 app.use("/api/users/", userRouter);
+
+app.use("/api/transaction", transactionRouter);
 
 app.use(errorHandler);
 

@@ -135,7 +135,7 @@
 /* SideNav */
 .navbar__menu {
   background-color: #fff;
-  height: 100vh;
+  height: calc(100vh + 5rem);
   overflow: hidden;
   position: absolute;
   transform: translateX(0);
@@ -360,7 +360,6 @@
 
   .navbar__mobile {
     display: flex;
-    padding-bottom: 30px;
     position: relative;
     z-index: 1000;
   }

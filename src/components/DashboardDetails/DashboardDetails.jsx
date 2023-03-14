@@ -3,21 +3,29 @@ import { Link, useLocation } from "react-router-dom";
 import DashboardNav from "../DashboardNav/DashboardNav";
 import { HiLogout } from "react-icons/hi";
 import { logOut } from "../../features/auth/authSlice";
-import { useDispatch } from "react-redux";
 import chat from "../../assets/chat.svg";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
 
 function DashboardDetails({ children }) {
   const { pathname } = useLocation();
+
   const dispatch = useDispatch();
+
+  const [toggle, setToggle] = useState(false);
 
   return (
     <>
       <div>
-        <DashboardNav />
+        <DashboardNav toggle={toggle} setToggle={setToggle} />
       </div>
       <div className="dashboardDetails">
         <div className="dashboardDetails__container container">
-          <div className="dashboardDetails__left">
+          <div
+            className={`dashboardDetails__left ${
+              toggle && "showDashboard__left"
+            } `}
+          >
             <ul>
               <li className={`${pathname === "/dashboard" ? "active" : ""}`}>
                 <Link to="/dashboard">
@@ -33,20 +41,6 @@ function DashboardDetails({ children }) {
                   <span>My account</span>
                 </Link>
               </li>
-              {/* <li>
-                <Link to="/deposit">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    xmlns:xlink="http://www.w3.org/1999/xlink"
-                    width="16"
-                    height="16"
-                    viewBox="0 0 16 16"
-                  >
-                    <path d="M2,11.0004 L2,13.0004 C2.00092857,13.5129714 2.38641837,13.9350071 2.8834457,13.9934835 L3,14.0004 L13,14.0004 C13.5125714,13.9994714 13.9346071,13.6139816 13.9930835,13.1169543 L14,13.0004 L14,11.0004 L16,11.0004 L16,13.0004 C15.9990357,14.5982214 14.7511467,15.9031411 13.1762836,15.9952082 L13,16.0004 L3,16.0004 C1.40217857,15.9994357 0.0972589286,14.7515467 0.00519178207,13.1766836 L0,13.0004 L0,11.0004 L2,11.0004 Z M8.9996,-4.97379915e-14 L8.9996,7.55 L10.2776,6.262 C10.6666,5.871 11.3006,5.87 11.6916,6.259 C12.0525231,6.619 12.0819905,7.18605325 11.7784293,7.57869413 L11.6956,7.673 L7.9766,11.413 L4.2776,7.692 C3.8876,7.3 3.8896,6.667 4.2816,6.277 C4.6416,5.91792308 5.20950533,5.89200592 5.60149076,6.19767547 L5.6956,6.281 L6.9996,7.597 L6.9996,-4.97379915e-14 L8.9996,-4.97379915e-14 Z"></path>
-                  </svg>
-                  <span>Deposit</span>
-                </Link>
-              </li> */}
               <li className={`${pathname === "/transfer" ? "active" : ""}`}>
                 <Link to="/transfer">
                   <svg

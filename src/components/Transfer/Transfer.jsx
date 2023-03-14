@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { createTransaction } from "../../features/auth/transactionSlice";
 import { getMe, reset } from "../../features/auth/user";
 
 function Transfer() {
@@ -29,7 +30,7 @@ function Transfer() {
   const trans = {
     amount,
     remark,
-    name: userInfo?.name,
+    transaction_type: "Debit",
   };
 
   const handleSubmit = (e) => {
@@ -44,6 +45,7 @@ function Transfer() {
     } else {
       // toast.success("You have Successfully Deposited");
       navigate("/transactions");
+      dispatch(createTransaction(trans));
     }
   };
 

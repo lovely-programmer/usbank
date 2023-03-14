@@ -71,7 +71,9 @@ function TCC() {
           </form>
 
           <div className="form__group goBack">
-            <button className="red_btn">GO BACK TO FUNDS TRASFER PAGE</button>
+            <Link to="/transfer">
+              <button className="red_btn">GO BACK TO FUNDS TRASFER PAGE</button>
+            </Link>
           </div>
 
           <p className="code__footer">

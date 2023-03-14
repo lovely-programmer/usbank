@@ -85,3 +85,10 @@
   background-color: #0c2074;
   color: var(--white-color);
 }
+
+@media screen and (max-width: 671px) {
+  .authDetails__container {
+    width: 100%;
+    margin: 0 20px;
+  }
+}

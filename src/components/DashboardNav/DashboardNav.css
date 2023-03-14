@@ -31,3 +31,21 @@
   border: 5px solid #0c2074;
   border-radius: 50%;
 }
+
+.showDashboard__left {
+  display: none;
+}
+
+@media screen and (max-width: 1050px) {
+  .showDashboard__left {
+    display: block !important;
+  }
+
+  .dashboardNav__container {
+    display: none;
+  }
+
+  .navbar__mobile-container .nav__logo {
+    padding-top: 5px;
+  }
+}

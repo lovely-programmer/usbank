@@ -250,6 +250,7 @@
   .header__image {
     padding-bottom: 42.8571428571%;
     position: relative;
+    margin-top: -20px;
   }
 
   .header__column {
