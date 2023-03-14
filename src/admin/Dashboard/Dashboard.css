@@ -5,10 +5,18 @@
 
 .admin__content {
   margin-top: 1rem;
+  margin-bottom: 1rem;
+  width: 100%;
 }
 
 .admin__children {
   width: 100%;
+  /* height: 100vh; */
+  /* overflow-y: scroll; */
+}
+
+.admin__children::-webkit-scrollbar {
+  display: none;
 }
 
 .admin__content .form__group input {
@@ -51,4 +59,14 @@
 
 .admin__content h1 {
   margin-bottom: 1rem;
+}
+
+@media screen and (max-width: 1050px) {
+  .admin__children {
+    margin-left: 2rem;
+  }
+
+  .admin__content table {
+    width: auto;
+  }
 }

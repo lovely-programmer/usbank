@@ -1,5 +1,5 @@
 import "./Navbar.css";
-import BankLogo from "../../assets/bank-logo.svg";
+import BankLogo from "../../assets/logo1.png";
 import { AiOutlineSearch } from "react-icons/ai";
 import { BiSupport } from "react-icons/bi";
 import { IoLocationOutline } from "react-icons/io5";
@@ -143,9 +143,9 @@ function Navbar({ toggle, setToggle }) {
                         <button>Log in</button>
                       </div>
                       <div className="login__help">
-                        <a href="">
+                        <Link to="/">
                           Get login help <AiOutlineRight />
-                        </a>
+                        </Link>
                       </div>
                       <div className="login__create-account">
                         <Link to="/signup">Create a username and password</Link>
@@ -160,10 +160,12 @@ function Navbar({ toggle, setToggle }) {
         <div className="navbar__second">
           <div className="container">
             <ul>
-              <li>
-                <a href="">
-                  <img src={BankLogo} alt="" />
-                </a>
+              <li className="nav__logo">
+                <Link to="/">
+                  <span className="first">Firs</span>
+                  <span className="bigT">T</span>
+                  <span className="trust">rust</span>
+                </Link>
               </li>
               <li>
                 <a href="">Personal</a>
@@ -194,10 +196,12 @@ function Navbar({ toggle, setToggle }) {
                     <MdOutlineMenu onClick={() => setToggle(true)} />
                   )}
                 </li>
-                <li>
-                  <a href="">
-                    <img src={BankLogo} alt="" />
-                  </a>
+                <li className="nav__logo">
+                  <Link to="/">
+                    <span className="first">Firs</span>
+                    <span className="bigT">T</span>
+                    <span className="trust">rust</span>
+                  </Link>
                 </li>
                 <li>
                   <Link to="/signin">Log in</Link>

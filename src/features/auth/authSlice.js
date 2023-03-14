@@ -3,8 +3,11 @@ import authService from "./authService";
 
 const user = JSON.parse(localStorage.getItem("user"));
 
+const adminUser = JSON.parse(localStorage.getItem("adminUser"));
+
 const initialState = {
   user: user ? user : null,
+  adminUser: adminUser ? adminUser : null,
   userInfo: [],
   isError: false,
   isSuccess: false,
@@ -41,6 +44,28 @@ export const login = createAsyncThunk("auth/login", async (user, thunkAPI) => {
       error.toString();
     return thunkAPI.rejectWithValue(message);
   }
+});
+
+// @Login Admin
+export const loginAdmin = createAsyncThunk(
+  "auth/loginadmin",
+  async (user, thunkAPI) => {
+    try {
+      return await authService.loginAdmin(user);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+export const logOut = createAsyncThunk("auth/logout", async () => {
+  localStorage.removeItem("user");
 });
 
 export const authSlice = createSlice({
@@ -82,6 +107,23 @@ export const authSlice = createSlice({
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
+        state.user = null;
+      })
+      .addCase(loginAdmin.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(loginAdmin.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.adminUser = action.payload;
+      })
+      .addCase(loginAdmin.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+        state.adminUser = null;
+      })
+      .addCase(logOut.fulfilled, (state) => {
         state.user = null;
       });
   },

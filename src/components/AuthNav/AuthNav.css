@@ -14,6 +14,24 @@
   object-fit: contain;
 }
 
+.authNav__logo a {
+  font-size: 2.2rem;
+  font-weight: bold;
+}
+
+.authNav__logo a .first {
+  color: var(--red-color);
+}
+
+.authNav__logo a .trust {
+  color: var(--blue-color);
+}
+
+.authNav__logo a .bigT {
+  font-size: 2.5rem !important;
+  padding: 0;
+}
+
 .auth__link a {
   color: #0c2074;
   font-size: 1rem;

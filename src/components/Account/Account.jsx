@@ -39,6 +39,10 @@ function Account() {
                 <td className="right">{userInfo?.account_number}</td>
               </tr>
               <tr>
+                <td className="left">Routing Number:</td>
+                <td className="right">0310-37832</td>
+              </tr>
+              <tr>
                 <td className="left">Account Holder:</td>
                 <td className="right">{userInfo?.name}</td>
               </tr>
@@ -51,7 +55,11 @@ function Account() {
                 <td className="right">USD</td>
               </tr>
               <tr>
-                <td className="left">Account Balance:</td>
+                <td className="left">Current Balance:</td>
+                <td className="right">{`${userInfo?.balance}.00`}</td>
+              </tr>
+              <tr>
+                <td className="left">Available Balance:</td>
                 <td className="right">{`${userInfo?.balance}.00`}</td>
               </tr>
             </tbody>

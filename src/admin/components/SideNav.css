@@ -32,3 +32,13 @@
 .sideNav__container-content a:hover {
   text-decoration: underline;
 }
+
+@media screen and (max-width: 1050px) {
+  .sideNav {
+    display: none;
+  }
+
+  .display {
+    display: block;
+  }
+}

@@ -7,18 +7,6 @@ const registerUser = asyncHandler(async (req, res) => {
   const { name, email, password, address, phoneNumber, account_type, balance } =
     req.body;
 
-  // if (
-  //   !name ||
-  //   !email ||
-  //   !password ||
-  //   !address ||
-  //   !phoneNumber ||
-  //   !account_type
-  // ) {
-  //   res.status(400);
-  //   throw new Error("Please add all fields");
-  // }
-
   // Check If user Exist
   const userExists = await User.findOne({ email });
 
@@ -45,13 +33,6 @@ const registerUser = asyncHandler(async (req, res) => {
   if (user) {
     res.status(201).json({
       _id: user.id,
-      name: user.name,
-      email: user.email,
-      address: user.address,
-      phoneNumber: user.phoneNumber,
-      account_type: user.account_type,
-      balance: user.balance,
-      isAdmin: user.isAdmin,
       token: generateToken(user._id),
     });
   } else {
@@ -86,7 +67,48 @@ const getMe = asyncHandler(async (req, res) => {
   res.status(200).json(req.user);
 });
 
-const getAllUsers = asyncHandler(async (req, res) => {});
+const getAllUsers = asyncHandler(async (req, res) => {
+  const isAdmin = req.user.isAdmin;
+  const allUser = await User.find();
+  if (isAdmin) {
+    res.status(200).json(allUser);
+  }
+});
+
+const editUser = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.params.id);
+
+  if (!user) {
+    res.status(404);
+    throw new Error("User not found");
+  }
+
+  const isAdmin = req.user.isAdmin;
+
+  if (isAdmin) {
+    const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    });
+
+    res.status(200).json(updatedUser);
+  }
+});
+
+const deleteUser = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.params.id);
+
+  if (!user) {
+    res.status(404);
+    throw new Error("User not found");
+  }
+
+  const isAdmin = req.user.isAdmin;
+
+  if (isAdmin) {
+    await User.findByIdAndDelete(req.params.id);
+    res.status(200).json({ id: req.params.id });
+  }
+});
 
 // @Generate JWT
 const generateToken = (id) => {
@@ -95,4 +117,4 @@ const generateToken = (id) => {
   });
 };
 
-export { registerUser, loginUser, getAllUsers, getMe };
+export { registerUser, loginUser, getAllUsers, getMe, editUser, deleteUser };

@@ -48,9 +48,49 @@ ul {
   z-index: 0;
 }
 
+.code__header {
+  margin-bottom: 1rem;
+}
+
+.code__header h2 {
+  margin-bottom: 1rem;
+}
+
+.code__header p {
+  line-height: 1.5rem;
+}
+
+.code__body .form__group button {
+  width: auto;
+  padding-top: 10px;
+  padding: 10px;
+}
+
+.code__body .form__group .red_btn {
+  background-color: var(--red-color);
+}
+
+.code__body .code__footer {
+  padding-top: 1rem;
+  font-size: 0.85rem;
+}
+
+.code__body .goBack {
+  margin-top: 5px !important;
+}
+
+.code__header p a {
+  text-decoration: underline;
+  color: #0a2d7e;
+}
+
 @media screen and (max-width: 1050px) {
   .container {
     width: calc(100% - 2rem);
+  }
+
+  .authNav__content {
+    display: none;
   }
 }
 

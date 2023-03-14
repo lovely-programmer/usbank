@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { login, reset } from "../../features/auth/authSlice";
+import { login, loginAdmin, reset } from "../../features/auth/authSlice";
 import Spinner from "../../components/spinner/Spinner";
 import Navbar from "../components/Navbar";
 
@@ -17,7 +17,7 @@ function AdminLogin() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { user, isLoading, isError, isSuccess, message } = useSelector(
+  const { adminUser, isLoading, isError, isSuccess, message } = useSelector(
     (state) => state.auth
   );
 
@@ -26,12 +26,12 @@ function AdminLogin() {
       toast.error(message);
     }
 
-    if (isSuccess && user.isAdmin) {
+    if (isSuccess && adminUser.isAdmin) {
       navigate("/osas_admin/newcustomer");
     }
 
     dispatch(reset());
-  }, [user, isSuccess, isError, message, navigate, dispatch]);
+  }, [adminUser, isSuccess, isError, message, navigate, dispatch]);
 
   const handleChange = (e) => {
     setFormData((prevState) => ({
@@ -43,7 +43,8 @@ function AdminLogin() {
   const handleSubmit = (e) => {
     e.preventDefault();
     const userData = { email, password };
-    dispatch(login(userData));
+
+    dispatch(loginAdmin(userData));
   };
 
   if (isLoading) {

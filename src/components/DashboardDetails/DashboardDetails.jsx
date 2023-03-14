@@ -1,9 +1,14 @@
 import "./DashboardDetails.css";
 import { Link, useLocation } from "react-router-dom";
 import DashboardNav from "../DashboardNav/DashboardNav";
+import { HiLogout } from "react-icons/hi";
+import { logOut } from "../../features/auth/authSlice";
+import { useDispatch } from "react-redux";
+import chat from "../../assets/chat.svg";
 
 function DashboardDetails({ children }) {
   const { pathname } = useLocation();
+  const dispatch = useDispatch();
 
   return (
     <>
@@ -81,19 +86,17 @@ function DashboardDetails({ children }) {
                   </span>
                 </Link>
               </li>
-              <li className={`${pathname === "/profile" ? "active" : ""}`}>
-                <Link to="/profile">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    xmlns:xlink="http://www.w3.org/1999/xlink"
-                    width="16"
-                    height="16"
-                    viewBox="0 0 16 16"
-                  >
-                    <path d="M9,0 L9.55181183,2.2026104 C10.0659889,2.33989304 10.5529746,2.5437604 11.0029675,2.8044109 L12.9497475,1.63603897 L14.363961,3.05025253 L13.1961695,4.99803468 C13.4567123,5.44804214 13.6604749,5.93502854 13.7976583,6.44919495 L16,7 L16,9 L13.7973896,9.55181183 C13.660107,10.0659889 13.4562396,10.5529746 13.1955891,11.0029675 L14.363961,12.9497475 L12.9497475,14.363961 L11.0029675,13.1955891 C10.5529746,13.4562396 10.0659889,13.660107 9.55181183,13.7973896 L9,16 L7,16 L6.44919495,13.7976583 C5.93464684,13.6603731 5.4473191,13.4564097 4.99703251,13.1955891 L3.05025253,14.363961 L1.63603897,12.9497475 L2.8044109,11.0029675 C2.5437604,10.5529746 2.33989304,10.0659889 2.2026104,9.55181183 L2.6039219e-16,9 L-1.0700185e-16,7 L2.20234168,6.44919495 C2.33962695,5.93464684 2.54359028,5.4473191 2.8044109,4.99703251 L1.63603897,3.05025253 L3.05025253,1.63603897 L4.99803468,2.80383054 C5.44804214,2.54328771 5.93502854,2.33952511 6.44919495,2.20234168 L7,0 L9,0 Z M8,6 C6.8954305,6 6,6.8954305 6,8 C6,9.1045695 6.8954305,10 8,10 C9.1045695,10 10,9.1045695 10,8 C10,6.8954305 9.1045695,6 8,6 Z"></path>
-                  </svg>
-                  <span>Settings</span>
+              <li className={`${pathname === "/contact" ? "active" : ""}`}>
+                <Link to="/contact">
+                  <img src={chat} alt="" />
+                  <span>Contact</span>
                 </Link>
+              </li>
+              <li onClick={() => dispatch(logOut())}>
+                <div className="dashboad__logout">
+                  <HiLogout />
+                  <span>Log out</span>
+                </div>
               </li>
             </ul>
           </div>

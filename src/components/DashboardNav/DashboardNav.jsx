@@ -22,14 +22,16 @@ function DashboardNav() {
   return (
     <div className="dashboardNav">
       <div className="dashboardNav__container container">
-        <div className="dashboardNav__logo">
+        <div className="authNav__logo">
           <Link to="/">
-            <img src={BankLogo} alt="" />
+            <span className="first">Firs</span>
+            <span className="bigT">T</span>
+            <span className="trust">rust</span>
           </Link>
         </div>
         <div className="dashboardNav__content">
           <ul>
-            <li>{`${userInfo?.balance}.00`} USD</li>
+            {/* <li>{`${userInfo?.balance}.00`} USD</li> */}
             <li>
               <Link to="/profile">
                 <img src={PersonIcon} alt="" />
