@@ -1,6 +1,8 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:5000/api/transaction";
+// const API_URL = "http://localhost:5000/api/transaction";
+
+const API_URL = "https://bank-app-backend-ofp9.onrender.com/api/transaction";
 
 const createTransaction = async (data, token) => {
   const config = {
