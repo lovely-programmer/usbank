@@ -83,7 +83,7 @@ function DashboardNav({ toggle, setToggle }) {
                   <img
                     src={
                       userInfo?.profilePicture
-                        ? `./upload/${userInfo?.profilePicture}`
+                        ? `./${userInfo?.profilePicture}`
                         : PersonIcon
                     }
                     style={{ cursor: "pointer" }}
@@ -127,7 +127,7 @@ function DashboardNav({ toggle, setToggle }) {
                     <img
                       src={
                         userInfo?.profilePicture
-                          ? `./upload/${userInfo?.profilePicture}`
+                          ? `./${userInfo?.profilePicture}`
                           : PersonIcon
                       }
                       style={{ cursor: "pointer" }}
