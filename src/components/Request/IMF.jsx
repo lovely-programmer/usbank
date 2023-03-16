@@ -1,16 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import { updateBalance } from "../../features/auth/transactionSlice";
 import { getMe, reset, updateImf } from "../../features/auth/user";
+import Spinner from "../spinner/Spinner";
+import { toast } from "react-toastify";
 
 function IMF() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [imfCode, setImfCode] = useState();
+  const [isLoading, setIsLoading] = useState(true);
 
-  const { userInfo, isLoading, isError, message } = useSelector(
-    (state) => state.userInfo
-  );
+  const { userInfo, isError, message } = useSelector((state) => state.userInfo);
+
+  const { transferData } = useSelector((state) => state.transactionsInfo);
 
   useEffect(() => {
     if (isError) {
@@ -24,23 +28,51 @@ function IMF() {
     };
   }, []);
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  const trans = {
+    amount: transferData?.amount,
+    remark: transferData?.remark,
+    transaction_type: "Debit",
+    name: userInfo?.name,
+  };
+
+  const userId = {
+    id: userInfo?._id,
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (userInfo?.imf_code !== tccCode) {
+    if (userInfo?.imf_code !== imfCode) {
       toast.error("Invalid IMF Code");
     } else if (
       userInfo?.imf_code === imfCode &&
       userInfo?.tax_code_need === true
     ) {
+      dispatch(updateImf(userId));
       navigate("/request/tax");
     } else if (userInfo?.imf_code === imfCode) {
-      dispatch(updateImf());
-      // toast.success("You have Successfully Deposited");
-      navigate("/transactions");
-      // setInterval(() => {
-      // }, 2000);
+      dispatch(updateImf(userId));
+      // localStorage.removeItem("transferData");
+      dispatch(updateBalance(transferData?.amount));
+      toast.success("You have Successfully Deposited");
+      const timer = setTimeout(() => {
+        navigate("/transactions");
+      }, 1000);
+      timer();
+      clearTimeout(timer);
+      dispatch(createTransaction(trans));
     }
   };
+
+  if (isLoading) {
+    return <Spinner />;
+  }
 
   return (
     <div className="code">

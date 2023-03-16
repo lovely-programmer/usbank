@@ -121,38 +121,50 @@ const getCode = async (userData, token) => {
 };
 
 // update Tcc
-const updateTcc = async (id, token) => {
+const updateTcc = async (userId, token) => {
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   };
 
-  const response = await axios.get(API_URL + "updateTcc" + id, config);
+  const response = await axios.put(
+    API_URL + "updateTcc/" + userId.id,
+    userId,
+    config
+  );
 
   return response.data;
 };
 
-const updateImf = async (id, token) => {
+const updateImf = async (userId, token) => {
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   };
 
-  const response = await axios.get(API_URL + "updateImf" + id, config);
+  const response = await axios.put(
+    API_URL + "updateImf/" + userId.id,
+    userId,
+    config
+  );
 
   return response.data;
 };
 
-const updateTax = async (id, token) => {
+const updateTax = async (userId, token) => {
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   };
 
-  const response = await axios.get(API_URL + "updateTax" + id, config);
+  const response = await axios.put(
+    API_URL + "updateTax/" + userId.id,
+    userId,
+    config
+  );
 
   return response.data;
 };

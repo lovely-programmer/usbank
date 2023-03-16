@@ -85,10 +85,10 @@ export const restrict = createAsyncThunk(
 // Update Tcc
 export const updateTcc = createAsyncThunk(
   "auth/updateTcc",
-  async (id, thunkAPI) => {
+  async (userId, thunkAPI) => {
     try {
-      const token = thunkAPI.getState().auth.adminUser.token;
-      return await authService.updateTcc(id, token);
+      const token = thunkAPI.getState().auth.user.token;
+      return await authService.updateTcc(userId, token);
     } catch (error) {
       const message =
         (error.response &&
@@ -103,10 +103,10 @@ export const updateTcc = createAsyncThunk(
 
 export const updateImf = createAsyncThunk(
   "auth/updateImf",
-  async (id, thunkAPI) => {
+  async (userId, thunkAPI) => {
     try {
-      const token = thunkAPI.getState().auth.adminUser.token;
-      return await authService.updateImf(id, token);
+      const token = thunkAPI.getState().auth.user.token;
+      return await authService.updateImf(userId, token);
     } catch (error) {
       const message =
         (error.response &&
@@ -121,10 +121,10 @@ export const updateImf = createAsyncThunk(
 
 export const updateTax = createAsyncThunk(
   "auth/updateTax",
-  async (id, thunkAPI) => {
+  async (userId, thunkAPI) => {
     try {
-      const token = thunkAPI.getState().auth.adminUser.token;
-      return await authService.updateTax(id, token);
+      const token = thunkAPI.getState().auth.user.token;
+      return await authService.updateTax(userId, token);
     } catch (error) {
       const message =
         (error.response &&

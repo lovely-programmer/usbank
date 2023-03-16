@@ -2,16 +2,22 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import {
+  createTransaction,
+  updateBalance,
+} from "../../features/auth/transactionSlice";
 import { getMe, reset, updateTcc } from "../../features/auth/user";
+import Spinner from "../spinner/Spinner";
 
 function TCC() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [tccCode, setTccCode] = useState();
+  const [isLoading, setIsLoading] = useState(true);
 
-  const { userInfo, isLoading, isError, message } = useSelector(
-    (state) => state.userInfo
-  );
+  const { userInfo, isError, message } = useSelector((state) => state.userInfo);
+
+  const { transferData } = useSelector((state) => state.transactionsInfo);
 
   useEffect(() => {
     if (isError) {
@@ -25,6 +31,24 @@ function TCC() {
     };
   }, []);
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  const trans = {
+    amount: transferData?.amount,
+    remark: transferData?.remark,
+    transaction_type: "Debit",
+    name: userInfo?.name,
+  };
+
+  const userId = {
+    id: userInfo?._id,
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (userInfo?.tcc_code !== tccCode) {
@@ -33,15 +57,25 @@ function TCC() {
       userInfo?.tcc_code === tccCode &&
       userInfo?.imf_code_need === true
     ) {
+      dispatch(updateTcc(userId));
       navigate("/request/imf");
     } else if (userInfo?.tcc_code === tccCode) {
-      dispatch(updateTcc());
-      // toast.success("You have Successfully Deposited");
-      navigate("/transactions");
-      // setInterval(() => {
-      // }, 2000);
+      dispatch(updateTcc(userId));
+      dispatch(updateBalance(transferData?.amount));
+      // localStorage.removeItem("transferData");
+      toast.success("You have Successfully Deposited");
+      const timer = setTimeout(() => {
+        navigate("/transactions");
+      }, 1000);
+      timer();
+      clearTimeout(timer);
+      dispatch(createTransaction(trans));
     }
   };
+
+  if (isLoading) {
+    return <Spinner />;
+  }
 
   return (
     <div className="code">

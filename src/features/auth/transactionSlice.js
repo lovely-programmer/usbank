@@ -1,15 +1,25 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import transactionService from "./transactionService";
 
-const transaction = JSON.parse(localStorage.getItem("transfer"));
+const transferData = JSON.parse(localStorage.getItem("transferData"));
 
 const initialState = {
-  transaction: transaction ? transaction : null,
+  transferData: transferData ? transferData : null,
+  // transferData: null,
+  transaction: [],
   isError: false,
   isSuccess: false,
   isLoading: false,
   message: "",
 };
+
+// export const useLocalStorage = createAsyncThunk(
+//   "transaction/useLocalStorage",
+//   async () => {
+//     const transferData = JSON.parse(localStorage.getItem("transferData"));
+//     return transferData;
+//   }
+// );
 
 export const createTransaction = createAsyncThunk(
   "transaction/createTransaction",
@@ -30,7 +40,43 @@ export const createTransaction = createAsyncThunk(
 );
 
 export const getTransaction = createAsyncThunk(
-  "transaction/createTransaction",
+  "transaction/getTransaction",
+  async (_, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token;
+      return await transactionService.getTransactions(token);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+export const updateBalance = createAsyncThunk(
+  "transaction/updateBalance",
+  async (userData, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token;
+      return await transactionService.updateBalance(userData, token);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+export const getTransactions = createAsyncThunk(
+  "transaction/getTransactions",
   async (_, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token;
@@ -68,6 +114,31 @@ export const transactionSlice = createSlice({
         state.isSuccess = true;
       })
       .addCase(createTransaction.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+      .addCase(getTransaction.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getTransaction.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.transaction = action.payload;
+      })
+      .addCase(getTransaction.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+      .addCase(updateBalance.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(updateBalance.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+      })
+      .addCase(updateBalance.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;

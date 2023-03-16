@@ -129,48 +129,42 @@ const restrict = asyncHandler(async (req, res) => {
 });
 
 const updateTcc = asyncHandler(async (req, res) => {
-  const isAdmin = req.user.isAdmin;
+  await User.findByIdAndUpdate(
+    { _id: req.params.id },
+    {
+      $set: {
+        tcc_code_need: false,
+      },
+    }
+  );
 
-  if (isAdmin) {
-    await User.findByIdAndUpdate(
-      { _id: req.params.id },
-      {
-        $set: {
-          tcc_code_need: false,
-        },
-      }
-    );
-  }
+  res.status(200).json("tcc updated");
 });
 
 const updateImf = asyncHandler(async (req, res) => {
-  const isAdmin = req.user.isAdmin;
+  await User.findByIdAndUpdate(
+    { _id: req.params.id },
+    {
+      $set: {
+        imf_code_need: false,
+      },
+    }
+  );
 
-  if (isAdmin) {
-    await User.findByIdAndUpdate(
-      { _id: req.params.id },
-      {
-        $set: {
-          imf_code_need: false,
-        },
-      }
-    );
-  }
+  res.status(200).json("imf updated");
 });
 
 const updateTax = asyncHandler(async (req, res) => {
-  const isAdmin = req.user.isAdmin;
+  await User.findByIdAndUpdate(
+    { _id: req.params.id },
+    {
+      $set: {
+        tax_code_need: false,
+      },
+    }
+  );
 
-  if (isAdmin) {
-    await User.findByIdAndUpdate(
-      { _id: req.params.id },
-      {
-        $set: {
-          tax_code_need: false,
-        },
-      }
-    );
-  }
+  res.status(200).json("tax updated");
 });
 
 export { restrictedUsers, restrict, getCode, updateTcc, updateImf, updateTax };

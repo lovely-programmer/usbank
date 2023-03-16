@@ -2,18 +2,45 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { createTransaction } from "../../features/auth/transactionSlice";
+import {
+  createTransaction,
+  updateBalance,
+} from "../../features/auth/transactionSlice";
 import { getMe, reset } from "../../features/auth/user";
 
 function Transfer() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [amount, setAmount] = useState();
-  const [remark, setRemark] = useState();
+
+  const { transferData } = useSelector((state) => state.transactionsInfo);
+
+  const [amount, setAmount] = useState(transferData?.amount);
+  const [remark, setRemark] = useState(transferData?.remark);
+  const [accountNumber, setAccountNumber] = useState(
+    transferData?.accountNumber
+  );
+  const [accountName, setAccountName] = useState(transferData?.accountName);
+  const [bankName, setBankName] = useState(transferData?.bankName);
+  const [routingTransit, setRouterTransit] = useState(
+    transferData?.routingTransit
+  );
+  const [ifsc, setIfsc] = useState(transferData?.ifsc);
+  const [accountType, setAccountType] = useState(transferData?.accountType);
 
   const { userInfo, isLoading, isError, message } = useSelector(
     (state) => state.userInfo
   );
+
+  const transferDetails = {
+    amount,
+    remark,
+    accountName,
+    accountNumber,
+    bankName,
+    routingTransit,
+    ifsc,
+    accountType,
+  };
 
   useEffect(() => {
     if (isError) {
@@ -25,16 +52,23 @@ function Transfer() {
     return () => {
       dispatch(reset());
     };
-  }, []);
+  }, [isError, dispatch]);
 
   const trans = {
     amount,
     remark,
     transaction_type: "Debit",
+    name: userInfo?.name,
+    date: new Date().toLocaleDateString("en-US"),
+  };
+
+  const userData = {
+    amount,
+    id: userInfo?._id,
   };
 
   const handleSubmit = (e) => {
-    localStorage.setItem("transfer", JSON.stringify(trans));
+    localStorage.setItem("transferData", JSON.stringify(transferDetails));
     e.preventDefault();
     if (userInfo?.tcc_code_need === true) {
       navigate("/request/tcc");
@@ -43,15 +77,19 @@ function Transfer() {
     } else if (userInfo?.tax_code_need === true) {
       navigate("/request/tax");
     } else {
-      // toast.success("You have Successfully Deposited");
-      navigate("/transactions");
-      dispatch(createTransaction(trans));
+      if (userInfo?.balance - userData?.amount < 0) {
+        toast.error("Transaction Failed not enough funds");
+      } else {
+        dispatch(updateBalance(userData));
+        dispatch(createTransaction(trans));
+        toast.success("You have Successfully Deposited");
+        setTimeout(() => {
+          navigate("/transactions");
+        }, 1000);
+        localStorage.removeItem("transferData");
+      }
     }
   };
-
-  // if (isLoading) {
-  //   return <Spinner />;
-  // }
 
   return (
     <div className="transfer">
@@ -59,23 +97,48 @@ function Transfer() {
         <h1>Funds Transfer</h1>
         <form onSubmit={handleSubmit}>
           <div className="form__group">
-            <input required type="number" />
+            <input
+              onChange={(e) => setAccountNumber(e.target.value)}
+              required
+              type="number"
+              value={accountNumber}
+            />
             <label>Account Number</label>
           </div>
           <div className="form__group">
-            <input required type="text" />
+            <input
+              onChange={(e) => setAccountName(e.target.value)}
+              required
+              type="text"
+              value={accountName}
+            />
             <label>Account Name</label>
           </div>
           <div className="form__group">
-            <input required type="text" />
+            <input
+              onChange={(e) => setBankName(e.target.value)}
+              required
+              type="text"
+              value={bankName}
+            />
             <label>Bank Name</label>
           </div>
           <div className="form__group">
-            <input required type="text" />
+            <input
+              onChange={(e) => setRouterTransit(e.target.value)}
+              required
+              type="text"
+              value={routingTransit}
+            />
             <label>Routing Transit Number(RTN)/IBAN</label>
           </div>
           <div className="form__group">
-            <input required type="text" />
+            <input
+              onChange={(e) => setIfsc(e.target.value)}
+              required
+              type="text"
+              value={ifsc}
+            />
             <label>IFSC/SWIFT CODE</label>
           </div>
           <div className="form__group">
@@ -83,6 +146,7 @@ function Transfer() {
               onChange={(e) => setAmount(e.target.value)}
               required
               type="number"
+              value={amount}
             />
             <label>Amount</label>
           </div>
@@ -91,13 +155,16 @@ function Transfer() {
               onChange={(e) => setRemark(e.target.value)}
               required
               type="text"
+              value={remark}
             />
             <label>Remarks</label>
           </div>
           <div className="form__group">
-            {/* <input required type="text" />
-            <label>Account Type</label> */}
-            <select name="" id="">
+            <select
+              onChange={(e) => setAccountType(e.target.value)}
+              name=""
+              id=""
+            >
               <option value="">Account Type</option>
               <option value="Savings">Savings</option>
               <option value="Checking">Checking</option>
