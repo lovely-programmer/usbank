@@ -2,16 +2,32 @@ import BankLogo from "../../assets/bank-logo.svg";
 import "./DashboardNav.css";
 import { Link } from "react-router-dom";
 import PersonIcon from "../../assets/person_icon.png";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { MdOutlineMenu } from "react-icons/md";
 import { HiX } from "react-icons/hi";
+import { upload } from "../../features/auth/upload";
+import { updateProfilePicture } from "../../features/auth/user";
 
 function DashboardNav({ toggle, setToggle }) {
   const navigate = useNavigate();
 
   const { user } = useSelector((state) => state.auth);
+
+  const handleChange = async (e) => {
+    setFile(e.target.files[0]);
+
+    if (file) {
+      const profilePicture = await upload(file);
+
+      dispatch(updateProfilePicture(profilePicture));
+
+      setFile(null);
+    }
+  };
+
+  const { file, setFile } = useState(null);
 
   const { userInfo } = useSelector((state) => state.userInfo);
 
@@ -34,9 +50,18 @@ function DashboardNav({ toggle, setToggle }) {
         <div className="dashboardNav__content">
           <ul>
             <li>
-              <Link to="/profile">
-                <img src={PersonIcon} alt="" />
-              </Link>
+              <div className="dashboard__profile">
+                <input
+                  type="file"
+                  id="file"
+                  style={{ display: "none" }}
+                  onChange={handleChange}
+                />
+
+                <label htmlFor="file">
+                  <img src={PersonIcon} style={{ cursor: "pointer" }} alt="" />
+                </label>
+              </div>
             </li>
           </ul>
         </div>
@@ -61,9 +86,22 @@ function DashboardNav({ toggle, setToggle }) {
                 </Link>
               </li>
               <li>
-                <Link to="">
-                  <img src={PersonIcon} alt="" />
-                </Link>
+                <div className="dashboard__profile">
+                  <input
+                    type="file"
+                    id="file"
+                    style={{ display: "none" }}
+                    onChange={(e) => setFile(e.target.files[0])}
+                  />
+
+                  <label htmlFor="file">
+                    <img
+                      src={PersonIcon}
+                      style={{ cursor: "pointer" }}
+                      alt=""
+                    />
+                  </label>
+                </div>
               </li>
             </ul>
           </div>

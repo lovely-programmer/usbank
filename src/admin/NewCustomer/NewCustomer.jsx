@@ -5,8 +5,11 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { register, reset } from "../../features/auth/authSlice";
 import { useState, useEffect } from "react";
+import { upload } from "../../features/auth/upload";
 
 function NewCustomer() {
+  const [file, setFile] = useState(null);
+  const [profilePicture, setProfilePicture] = useState();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -55,17 +58,23 @@ function NewCustomer() {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
       toast.error("Password do not match");
     } else {
+      if (file) {
+        setProfilePicture(await upload(file));
+        // const profilePicture = await upload(file);
+      }
+
       const userData = {
         name,
         email,
         password,
         address,
         phoneNumber,
+        profilePicture,
         account_type,
         balance,
       };
@@ -123,6 +132,16 @@ function NewCustomer() {
                 onChange={handleChange}
               />
               <label htmlFor="fullName">Phone Number</label>
+            </div>
+            <div className="form__group">
+              <input
+                type="file"
+                required
+                id="profilePicture"
+                name="profilePicture"
+                value={profilePicture}
+                onChange={(e) => setFile(e.target.files[0])}
+              />
             </div>
             <div className="form__group">
               <select

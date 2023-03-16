@@ -5,6 +5,7 @@ import connectDb from "./config/db.js";
 import cors from "cors";
 import errorHandler from "./middleware/errorMiddleware.js";
 import transactionRouter from "./routes/transactionRoutes.js";
+import multer from "multer";
 
 dotenv.config();
 
@@ -19,6 +20,22 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use(cors());
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "../public/upload");
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + file.originalname);
+  },
+});
+
+const upload = multer({ storage: storage });
+
+app.post("/api/upload", upload.single("file"), (req, res) => {
+  const file = req.file;
+  res.status(200).json(file.filename);
+});
 
 app.use("/api/users/", userRouter);
 

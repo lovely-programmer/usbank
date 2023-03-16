@@ -44,7 +44,7 @@ function ManageCustomers() {
           <table>
             <thead>
               <tr>
-                <td className="right">id</td>
+                {/* <td className="right">id</td> */}
                 <td className="right">Name</td>
                 <td className="right">Account Number</td>
                 <td className="right">Account Balance</td>
@@ -56,7 +56,7 @@ function ManageCustomers() {
             <tbody>
               {allUser?.map((user) => (
                 <tr key={user?._id}>
-                  <td className="right">{user?._id}</td>
+                  {/* <td className="right">{user?._id}</td> */}
                   <td className="right">{user?.name}</td>
                   <td className="right">{user?.account_number}</td>
                   <td className="right">{user?.account_type}</td>

@@ -15,7 +15,7 @@ function AdminWrapper({ children }) {
   useEffect(() => {
     if (!adminUser || adminUser?.isAdmin == false) {
       localStorage.clear("adminUser");
-      navigate("/");
+      navigate("/osas_admin/login");
     }
   }, [adminUser]);
 

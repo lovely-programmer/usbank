@@ -25,6 +25,25 @@ export const getMe = createAsyncThunk("userInfo/user", async (_, thunkAPI) => {
   }
 });
 
+// @Update Profile Picture
+export const updateProfilePicture = createAsyncThunk(
+  "userInfo/updateProfilePicture",
+  async (profilePicture, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token;
+      return await authService.updateProfilePicture(profilePicture, token);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 // @Get all User
 export const getAllUsers = createAsyncThunk(
   "userInfo/alluser",

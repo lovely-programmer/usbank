@@ -13,6 +13,7 @@ const userSchema = mongoose.Schema(
     password: { type: String, required: [true, "Please add a password"] },
     phoneNumber: { type: String, required: [true, "Please add a phoneNumber"] },
     address: { type: String, required: [true, "Please add a valid address"] },
+    profilePicture: { type: String },
     account_number: { type: Number, default: account_number },
     account_type: {
       type: String,

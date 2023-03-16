@@ -50,6 +50,23 @@ const getMe = async (token) => {
   return response.data;
 };
 
+// @updateProfile picture
+const updateProfilePicture = async (profilePicture, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  const response = await axios.put(
+    API_URL + "updateProfilePicture/",
+    profilePicture,
+    config
+  );
+
+  return response.data;
+};
+
 // @Get all User detail
 const getAllUsers = async (token) => {
   const config = {
@@ -204,6 +221,7 @@ const authService = {
   login,
   loginAdmin,
   getMe,
+  updateProfilePicture,
   getAllUsers,
   editUser,
   deleteUser,

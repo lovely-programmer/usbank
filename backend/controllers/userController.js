@@ -4,8 +4,16 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
 const registerUser = asyncHandler(async (req, res) => {
-  const { name, email, password, address, phoneNumber, account_type, balance } =
-    req.body;
+  const {
+    name,
+    email,
+    password,
+    address,
+    phoneNumber,
+    account_type,
+    balance,
+    profilePicture,
+  } = req.body;
 
   // Check If user Exist
   const userExists = await User.findOne({ email });
@@ -26,6 +34,7 @@ const registerUser = asyncHandler(async (req, res) => {
     password: hashedPassword,
     address,
     phoneNumber,
+    profilePicture,
     account_type,
     balance,
   });
@@ -75,6 +84,16 @@ const getAllUsers = asyncHandler(async (req, res) => {
   }
 });
 
+const updateProfilePicture = asyncHandler(async (req, res) => {
+  const profilePicture = req.body.profilePicture;
+
+  const id = req.user.id;
+
+  await User.findByIdAndUpdate({ _id: id }, { $set: { profilePicture } });
+
+  res.status(200).json("Updated Profile Picture Successfully");
+});
+
 const editUser = asyncHandler(async (req, res) => {
   const user = await User.findById(req.params.id);
 
@@ -117,4 +136,12 @@ const generateToken = (id) => {
   });
 };
 
-export { registerUser, loginUser, getAllUsers, getMe, editUser, deleteUser };
+export {
+  registerUser,
+  loginUser,
+  getAllUsers,
+  getMe,
+  editUser,
+  deleteUser,
+  updateProfilePicture,
+};

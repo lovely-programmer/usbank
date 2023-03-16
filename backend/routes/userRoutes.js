@@ -6,6 +6,7 @@ import {
   getMe,
   editUser,
   deleteUser,
+  updateProfilePicture,
 } from "../controllers/userController.js";
 import {
   getCode,
@@ -30,6 +31,9 @@ userRouter.put("/updateImf/:id", protect, updateImf);
 userRouter.put("/updateTax/:id", protect, updateTax);
 
 userRouter.put("/:id", protect, editUser);
+
+userRouter.put("/updateProfilePicture/:id", protect, updateProfilePicture);
+
 userRouter.post("/", registerUser);
 userRouter.post("/login", loginUser);
 userRouter.get("/allusers", protect, getAllUsers);
