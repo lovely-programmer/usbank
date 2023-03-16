@@ -76,7 +76,7 @@ function DashboardDetails({ children }) {
                     ></path>
                   </svg>
                   <span>
-                    Transaction <br /> history
+                    Transaction <br className="br" /> history
                   </span>
                 </Link>
               </li>
