@@ -9,14 +9,13 @@ function ManageCustomers() {
   const dispatch = useDispatch();
   const [deleted, setDeleted] = useState(false);
 
-  const { allUser, isLoading, isError, message } = useSelector(
+  const { allUser, isLoading, isSuccess, isError, message } = useSelector(
     (state) => state.userInfo
   );
 
   const handleDelete = (id) => {
     console.log(id);
     dispatch(deleteOffice(id));
-    setDeleted(true);
   };
 
   useEffect(() => {
@@ -24,12 +23,16 @@ function ManageCustomers() {
       console.log(message);
     }
 
+    if (isSuccess) {
+      setDeleted(true);
+    }
+
     dispatch(getAllUsers());
 
     return () => {
       dispatch(reset());
     };
-  }, [deleted]);
+  }, [deleted, dispatch, isError]);
 
   if (isLoading) {
     return <Spinner />;

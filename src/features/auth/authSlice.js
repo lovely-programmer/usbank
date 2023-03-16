@@ -68,6 +68,10 @@ export const logOut = createAsyncThunk("auth/logout", async () => {
   localStorage.removeItem("user");
 });
 
+export const logOutAdmin = createAsyncThunk("auth/logoutAdmin", async () => {
+  localStorage.removeItem("adminUser");
+});
+
 export const authSlice = createSlice({
   name: "auth",
   initialState,
@@ -125,6 +129,9 @@ export const authSlice = createSlice({
       })
       .addCase(logOut.fulfilled, (state) => {
         state.user = null;
+      })
+      .addCase(logOutAdmin.fulfilled, (state) => {
+        state.adminUser = null;
       });
   },
 });

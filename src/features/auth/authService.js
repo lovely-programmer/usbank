@@ -51,16 +51,20 @@ const getMe = async (token) => {
 };
 
 // @updateProfile picture
-const updateProfilePicture = async (profilePicture, token) => {
+const updateProfilePicture = async (userData, token) => {
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   };
 
+  console.log(userData);
+
+  const data = { profilePicture: userData.profilePicture };
+
   const response = await axios.put(
-    API_URL + "updateProfilePicture/",
-    profilePicture,
+    API_URL + "updateProfilePicture/" + userData.id,
+    data,
     config
   );
 

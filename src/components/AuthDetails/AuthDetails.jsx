@@ -137,8 +137,9 @@ function AuthDetails() {
               name="account_type"
               id=""
             >
+              <option value="">Select Account</option>
               <option value="Savings">Savings</option>
-              <option value="Current">Current</option>
+              <option value="Current">Checking</option>
             </select>
           </div>
           <div className="form__group">

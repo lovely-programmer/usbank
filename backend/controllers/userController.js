@@ -87,7 +87,7 @@ const getAllUsers = asyncHandler(async (req, res) => {
 const updateProfilePicture = asyncHandler(async (req, res) => {
   const profilePicture = req.body.profilePicture;
 
-  const id = req.user.id;
+  const id = req.params.id;
 
   await User.findByIdAndUpdate({ _id: id }, { $set: { profilePicture } });
 

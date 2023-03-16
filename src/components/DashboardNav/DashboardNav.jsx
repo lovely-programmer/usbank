@@ -8,11 +8,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { MdOutlineMenu } from "react-icons/md";
 import { HiX } from "react-icons/hi";
 import { upload } from "../../features/auth/upload";
-import { updateProfilePicture } from "../../features/auth/user";
+import { getMe, updateProfilePicture } from "../../features/auth/user";
+import { reset } from "../../features/auth/authSlice";
 
 function DashboardNav({ toggle, setToggle }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const { userInfo, isError, message } = useSelector((state) => state.userInfo);
 
   const { user } = useSelector((state) => state.auth);
 
@@ -23,7 +26,12 @@ function DashboardNav({ toggle, setToggle }) {
       if (file) {
         const profilePicture = await upload(file);
 
-        dispatch(updateProfilePicture(profilePicture));
+        const userData = {
+          id: userInfo?._id,
+          profilePicture,
+        };
+
+        dispatch(updateProfilePicture(userData));
 
         setFile(null);
       }
@@ -32,13 +40,23 @@ function DashboardNav({ toggle, setToggle }) {
     handleImage();
   }, [file, dispatch]);
 
-  const { userInfo } = useSelector((state) => state.userInfo);
-
   useEffect(() => {
     if (!user) {
       navigate("/");
     }
   }, [user, navigate]);
+
+  useEffect(() => {
+    if (isError) {
+      console.log(message);
+    }
+
+    dispatch(getMe());
+
+    return () => {
+      dispatch(reset());
+    };
+  }, [file, dispatch]);
 
   return (
     <div className="dashboardNav">
@@ -62,7 +80,15 @@ function DashboardNav({ toggle, setToggle }) {
                 />
 
                 <label htmlFor="file">
-                  <img src={PersonIcon} style={{ cursor: "pointer" }} alt="" />
+                  <img
+                    src={
+                      userInfo?.profilePicture
+                        ? `./upload/${userInfo?.profilePicture}`
+                        : PersonIcon
+                    }
+                    style={{ cursor: "pointer" }}
+                    alt=""
+                  />
                 </label>
               </div>
             </li>
@@ -99,7 +125,11 @@ function DashboardNav({ toggle, setToggle }) {
 
                   <label htmlFor="file">
                     <img
-                      src={PersonIcon}
+                      src={
+                        userInfo?.profilePicture
+                          ? `./upload/${userInfo?.profilePicture}`
+                          : PersonIcon
+                      }
                       style={{ cursor: "pointer" }}
                       alt=""
                     />

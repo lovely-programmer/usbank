@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import { register, reset } from "../../features/auth/authSlice";
 import { useState, useEffect } from "react";
 import { upload } from "../../features/auth/upload";
+import Spinner from "../../components/spinner/Spinner";
 
 function NewCustomer() {
   const [file, setFile] = useState(null);
@@ -64,23 +65,28 @@ function NewCustomer() {
       toast.error("Password do not match");
     } else {
       if (file) {
-        setProfilePicture(await upload(file));
-        // const profilePicture = await upload(file);
+        const profilePicture = await upload(file);
+
+        const userData = {
+          name,
+          email,
+          password,
+          address,
+          phoneNumber,
+          profilePicture,
+          account_type,
+          balance,
+        };
+        dispatch(register(userData));
       }
 
-      const userData = {
-        name,
-        email,
-        password,
-        address,
-        phoneNumber,
-        profilePicture,
-        account_type,
-        balance,
-      };
-      dispatch(register(userData));
+      // navigate("/osas_admin/managecustomers");
     }
   };
+
+  if (isLoading) {
+    return <Spinner />;
+  }
 
   return (
     <div>
@@ -150,6 +156,7 @@ function NewCustomer() {
                 name="account_type"
                 id=""
               >
+                <option value="">Account Type</option>
                 <option value="Savings">Savings</option>
                 <option value="Current">Current</option>
               </select>

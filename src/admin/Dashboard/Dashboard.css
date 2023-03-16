@@ -11,8 +11,8 @@
 
 .admin__children {
   width: 100%;
-  /* height: 100vh; */
-  /* overflow-y: scroll; */
+  height: 100vh;
+  overflow-y: scroll;
 }
 
 .admin__children::-webkit-scrollbar {
@@ -64,6 +64,7 @@
 @media screen and (max-width: 1050px) {
   .admin__children {
     margin-left: 2rem;
+    padding-bottom: 10rem;
   }
 
   .admin__content table {

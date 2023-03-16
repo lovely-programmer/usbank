@@ -28,10 +28,10 @@ export const getMe = createAsyncThunk("userInfo/user", async (_, thunkAPI) => {
 // @Update Profile Picture
 export const updateProfilePicture = createAsyncThunk(
   "userInfo/updateProfilePicture",
-  async (profilePicture, thunkAPI) => {
+  async (userData, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token;
-      return await authService.updateProfilePicture(profilePicture, token);
+      return await authService.updateProfilePicture(userData, token);
     } catch (error) {
       const message =
         (error.response &&
