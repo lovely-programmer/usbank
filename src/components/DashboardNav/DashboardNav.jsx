@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import PersonIcon from "../../assets/person_icon.png";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { MdOutlineMenu } from "react-icons/md";
 import { HiX } from "react-icons/hi";
 import { upload } from "../../features/auth/upload";
@@ -12,22 +12,25 @@ import { updateProfilePicture } from "../../features/auth/user";
 
 function DashboardNav({ toggle, setToggle }) {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const { user } = useSelector((state) => state.auth);
 
-  const handleChange = async (e) => {
-    setFile(e.target.files[0]);
+  const [file, setFile] = useState(null);
 
-    if (file) {
-      const profilePicture = await upload(file);
+  useEffect(() => {
+    const handleImage = async () => {
+      if (file) {
+        const profilePicture = await upload(file);
 
-      dispatch(updateProfilePicture(profilePicture));
+        dispatch(updateProfilePicture(profilePicture));
 
-      setFile(null);
-    }
-  };
+        setFile(null);
+      }
+    };
 
-  const { file, setFile } = useState(null);
+    handleImage();
+  }, [file, dispatch]);
 
   const { userInfo } = useSelector((state) => state.userInfo);
 
@@ -55,7 +58,7 @@ function DashboardNav({ toggle, setToggle }) {
                   type="file"
                   id="file"
                   style={{ display: "none" }}
-                  onChange={handleChange}
+                  onChange={(e) => setFile(e.target.files[0])}
                 />
 
                 <label htmlFor="file">
