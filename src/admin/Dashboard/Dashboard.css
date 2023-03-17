@@ -62,9 +62,15 @@
 }
 
 @media screen and (max-width: 1050px) {
-  .admin__children {
+   .admin__children {
     margin-left: 2rem;
-    padding-bottom: 10rem;
+    padding-bottom: 6rem;
+    height: auto;
+  }
+
+  .display {
+    padding-bottom: 5rem;
+    height: auto;
   }
 
   .admin__content table {
