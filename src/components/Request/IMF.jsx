@@ -82,7 +82,7 @@ function IMF() {
           <p>Input IMF code to Continue Transaction Process</p>
           <p>
             I don't have my IMF Code. Contact First Trust Customer Care via
-            email: <Link>customer_care@firstrustfinance.com</Link>
+            email: <Link to="/contact">customer_care@firstrustfinance.com</Link>
           </p>
         </div>
         <div className="code__body">

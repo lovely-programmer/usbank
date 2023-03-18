@@ -76,7 +76,7 @@ function TAX() {
           <p>Input TAX code to Continue Transaction Process</p>
           <p>
             I don't have my TAX Code. Contact First Trust Customer Care via
-            email: <Link>customer_care@firstrustfinance.com</Link>
+            email: <Link to="/contact">customer_care@firstrustfinance.com</Link>
           </p>
         </div>
         <div className="code__body">
