@@ -203,7 +203,7 @@ function Navbar({ toggle, setToggle }) {
                     <span className="trust">rust</span>
                   </Link>
                 </li>
-                <li>
+                <li className="navbar__login-link">
                   <Link to="/signin">Log in</Link>
                 </li>
               </ul>
