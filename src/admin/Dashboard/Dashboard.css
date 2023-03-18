@@ -11,13 +11,7 @@
 
 .admin__children {
   width: 100%;
-  /* height: 100vh;
-  overflow-y: scroll; */
 }
-
-/* .admin__children::-webkit-scrollbar {
-  display: none;
-} */
 
 .admin__content .form__group input {
   width: 70%;

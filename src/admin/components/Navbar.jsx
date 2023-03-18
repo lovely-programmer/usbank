@@ -28,7 +28,7 @@ function Navbar({ toggle, setToggle }) {
                 )}
               </li>
               <li>
-                <Link to="/">
+                <Link to="/osas_admin">
                   <img src={BankLogo} alt="" />
                 </Link>
               </li>
