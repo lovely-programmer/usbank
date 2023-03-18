@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { MdOutlineMenu } from "react-icons/md";
 import { HiX } from "react-icons/hi";
-import { upload } from "../../features/auth/upload";
+// import { upload } from "../../features/auth/upload";
 import { getMe, updateProfilePicture } from "../../features/auth/user";
 import { reset } from "../../features/auth/authSlice";
 
@@ -21,24 +21,24 @@ function DashboardNav({ toggle, setToggle }) {
 
   const [file, setFile] = useState(null);
 
-  useEffect(() => {
-    const handleImage = async () => {
-      if (file) {
-        const profilePicture = await upload(file);
+  // useEffect(() => {
+  //   const handleImage = async () => {
+  //     if (file) {
+  //       const profilePicture = await upload(file);
 
-        const userData = {
-          id: userInfo?._id,
-          profilePicture,
-        };
+  //       const userData = {
+  //         id: userInfo?._id,
+  //         profilePicture,
+  //       };
 
-        dispatch(updateProfilePicture(userData));
+  //       dispatch(updateProfilePicture(userData));
 
-        setFile(null);
-      }
-    };
+  //       setFile(null);
+  //     }
+  //   };
 
-    handleImage();
-  }, [file, dispatch]);
+  //   handleImage();
+  // }, [file, dispatch]);
 
   useEffect(() => {
     if (!user) {
@@ -83,7 +83,7 @@ function DashboardNav({ toggle, setToggle }) {
                   <img
                     src={
                       userInfo?.profilePicture
-                        ? `./${userInfo?.profilePicture}`
+                        ? userInfo?.profilePicture
                         : PersonIcon
                     }
                     style={{ cursor: "pointer" }}
@@ -116,24 +116,15 @@ function DashboardNav({ toggle, setToggle }) {
               </li>
               <li>
                 <div className="dashboard__profile">
-                  <input
-                    type="file"
-                    id="file"
-                    style={{ display: "none" }}
-                    onChange={(e) => setFile(e.target.files[0])}
+                  <img
+                    src={
+                      userInfo?.profilePicture
+                        ? userInfo?.profilePicture
+                        : PersonIcon
+                    }
+                    style={{ cursor: "pointer" }}
+                    alt=""
                   />
-
-                  <label htmlFor="file">
-                    <img
-                      src={
-                        userInfo?.profilePicture
-                          ? `./${userInfo?.profilePicture}`
-                          : PersonIcon
-                      }
-                      style={{ cursor: "pointer" }}
-                      alt=""
-                    />
-                  </label>
                 </div>
               </li>
             </ul>

@@ -80,7 +80,7 @@ ul {
 }
 
 .code__header p a {
-  text-decoration: underline;
+  /* text-decoration: underline; */
   color: #0a2d7e;
 }
 

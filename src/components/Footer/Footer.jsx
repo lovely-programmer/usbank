@@ -67,11 +67,12 @@ function Footer() {
           <ul className="footer__span">
             <li>
               <span>
-                U.S Bank <br /> 800 Nicollet Mall <br /> Minneapolis, MN 55402
+                Firtrust Bank <br /> 800 Nicollet Mall <br /> Minneapolis, MN
+                55402
               </span>
             </li>
             <li>
-              <span>© 2023 U.S. Bank</span>
+              <span>© 2023 Firtrust Bank</span>
             </li>
           </ul>
         </div>
@@ -119,11 +120,12 @@ function Footer() {
             <ul className="footer__span">
               <li>
                 <span>
-                  U.S Bank <br /> 800 Nicollet Mall <br /> Minneapolis, MN 55402
+                  Firtrust Bank <br /> 800 Nicollet Mall <br /> Minneapolis, MN
+                  55402
                 </span>
               </li>
               <li>
-                <span>© 2023 U.S. Bank</span>
+                <span>© 2023 Firtrust Bank</span>
               </li>
             </ul>
           </div>

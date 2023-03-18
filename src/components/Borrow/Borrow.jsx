@@ -14,8 +14,8 @@ function Borrow() {
         <div className="borrow__p">
           <p>
             From calculators and rate charts to get you started, to experienced
-            loan officers and bankers, U.S. Bank has answers for all your loan
-            and mortgage questions.
+            loan officers and bankers, Firtrust Bank has answers for all your
+            loan and mortgage questions.
           </p>
         </div>
         <div className="borrow__content">

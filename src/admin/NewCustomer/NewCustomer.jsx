@@ -5,12 +5,11 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { register, reset } from "../../features/auth/authSlice";
 import { useState, useEffect } from "react";
-import { upload } from "../../features/auth/upload";
+import { convertToBase64 } from "../../features/auth/upload";
 import Spinner from "../../components/spinner/Spinner";
 
 function NewCustomer() {
-  const [file, setFile] = useState(null);
-  const [profilePicture, setProfilePicture] = useState();
+  const [profilePicture, setProfilePicture] = useState(null);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -59,28 +58,28 @@ function NewCustomer() {
     }));
   };
 
+  const handleFileUpload = async (e) => {
+    const file = e.target.files[0];
+    const base64 = await convertToBase64(file);
+    setProfilePicture(base64);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
       toast.error("Password do not match");
     } else {
-      if (file) {
-        const profilePicture = await upload(file);
-
-        const userData = {
-          name,
-          email,
-          password,
-          address,
-          phoneNumber,
-          profilePicture,
-          account_type,
-          balance,
-        };
-        dispatch(register(userData));
-      }
-
-      // navigate("/osas_admin/managecustomers");
+      const userData = {
+        name,
+        email,
+        password,
+        address,
+        phoneNumber,
+        profilePicture,
+        account_type,
+        balance,
+      };
+      dispatch(register(userData));
     }
   };
 
@@ -145,8 +144,7 @@ function NewCustomer() {
                 required
                 id="profilePicture"
                 name="profilePicture"
-                value={profilePicture}
-                onChange={(e) => setFile(e.target.files[0])}
+                onChange={handleFileUpload}
               />
             </div>
             <div className="form__group">

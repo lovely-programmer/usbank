@@ -33,7 +33,7 @@ function Header() {
               <img src={flowerMan} alt="" />
             </div>
             <div className="card__details">
-              <h2>U.S BANCORP INVESTMENTS</h2>
+              <h2>Firtrust BANCORP INVESTMENTS</h2>
               <h3>
                 Bonus? Refund? Put extra cash to work with Automated Investor.
               </h3>
@@ -49,7 +49,7 @@ function Header() {
               <img src={photoCouple} alt="" />
             </div>
             <div className="card__details">
-              <h2>U.S BANCORP INVESTMENTS</h2>
+              <h2>Firtrust BANCORP INVESTMENTS</h2>
               <h3>Get tax tools, tips and up to $20 off TurboTax.</h3>
               <div className="card__link">
                 <a href="">

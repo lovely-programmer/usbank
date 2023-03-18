@@ -1,8 +1,8 @@
 import axios from "axios";
 
-const API_URL = "https://bank-app-backend-ofp9.onrender.com/api/upload/";
+// const API_URL = "https://bank-app-backend-ofp9.onrender.com/api/upload/";
 
-// const API_URL = "http://localhost:5000/api/upload/";
+const API_URL = "http://localhost:5000/api/upload/";
 
 // * Upload Image
 export const upload = async (file) => {
@@ -16,4 +16,18 @@ export const upload = async (file) => {
   } catch (err) {
     console.log(err);
   }
+};
+
+// * Convert to base64
+export const convertToBase64 = async (file) => {
+  return new Promise((resolve, reject) => {
+    const fileReader = new FileReader();
+    fileReader.readAsDataURL(file);
+    fileReader.onloadend = () => {
+      resolve(fileReader.result);
+    };
+    fileReader.onerror = (err) => {
+      reject(err);
+    };
+  });
 };

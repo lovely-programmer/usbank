@@ -13,7 +13,9 @@ function Access() {
           </div>
           <div className="access__content-center">
             <div className="access__center-header">
-              <h3>Bank from almost anywhere with the U.S. Bank Mobile App.</h3>
+              <h3>
+                Bank from almost anywhere with the Firtrust Bank Mobile App.
+              </h3>
             </div>
             <div className="access__center-list">
               <ul>
