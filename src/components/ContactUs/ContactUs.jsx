@@ -11,7 +11,7 @@ function ContactUs() {
 
     emailjs
       .sendForm(
-        "service_t1t5aun",
+        "service_37p0wce",
         "template_lmifd7p",
         form.current,
         "user_AnjF4Y8dbderf60LOsMSF"
@@ -39,11 +39,11 @@ function ContactUs() {
         </div>
 
         <div className="contactUs__email">
-          E-mail: customer_care@firstrustfinance.com{" "}
+          E-mail: customer_care@firstrustbk.com{" "}
         </div>
 
         <div className="contactUs__email">
-          E-mail: info@firstrustfinance.com{" "}
+          E-mail: info@firstrustbk.com{" "}
         </div>
 
         <div>
