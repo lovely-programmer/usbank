@@ -53,14 +53,14 @@ function TransactionHistory() {
                 </tr>
               ))}
               <tr>
-                <td> 07/15/2024</td>
+                <td>07/15/2024</td>
                 <td>Credit</td>
                 <td>800000</td>
                 <td>Management</td>
                 <td>Chemical Purchase</td>
               </tr>
               <tr>
-                <td> 06/10/2024</td>
+                <td>06/10/2024</td>
                 <td>Debit</td>
                 <td>200000</td>
                 <td>LAMBERTH</td>
@@ -95,7 +95,7 @@ function TransactionHistory() {
                 <td>Transplant Surgery</td>
               </tr>
               <tr>
-                <td> 12/15/2023</td>
+                <td>12/15/2023</td>
                 <td>Credit</td>
                 <td>170000</td>
                 <td>Management</td>
