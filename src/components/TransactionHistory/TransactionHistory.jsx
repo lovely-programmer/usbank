@@ -53,6 +53,41 @@ function TransactionHistory() {
                 </tr>
               ))}
               <tr>
+                <td>12/15/2024</td>
+                <td>Credit</td>
+                <td>550000</td>
+                <td>Management</td>
+                <td>Chemical Purchase</td>
+              </tr>
+              <tr>
+                <td>11/11/2024</td>
+                <td>Credit</td>
+                <td>100000</td>
+                <td>Management</td>
+                <td>Chemical Purchase</td>
+              </tr>
+              <tr>
+                <td>10/11/2024</td>
+                <td>Credit</td>
+                <td>150000</td>
+                <td>Management</td>
+                <td>Chemical Purchase</td>
+              </tr>
+              <tr>
+                <td>09/1/2024</td>
+                <td>Credit</td>
+                <td>700000</td>
+                <td>Management</td>
+                <td>Chemical Purchase</td>
+              </tr>
+              <tr>
+                <td>08/13/2024</td>
+                <td>Debit</td>
+                <td>200000</td>
+                <td>LAMBERTH</td>
+                <td>Supplies</td>
+              </tr>
+              <tr>
                 <td>07/15/2024</td>
                 <td>Credit</td>
                 <td>800000</td>
