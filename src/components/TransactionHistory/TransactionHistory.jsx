@@ -57,7 +57,7 @@ function TransactionHistory() {
                 <td>Credit</td>
                 <td>550000</td>
                 <td>Management</td>
-                <td>Chemical Purchase</td>
+                <td>Payment</td>
               </tr>
               <tr>
                 <td>11/11/2024</td>
