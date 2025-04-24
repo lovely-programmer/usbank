@@ -39,11 +39,11 @@ function ContactUs() {
         </div>
 
         <div className="contactUs__email">
-          E-mail: customer_care@firstrustbk.com{" "}
+          E-mail: customercare@firstfinancee.com{" "}
         </div>
 
         <div className="contactUs__email">
-          E-mail: info@firstrustbk.com{" "}
+          E-mail: customercare@firstfinancee.com{" "}
         </div>
 
         <div>
